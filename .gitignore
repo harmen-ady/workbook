@@ -12,3 +12,4 @@ profiles.clj
 /log
 .*
 *.iml
+/db
