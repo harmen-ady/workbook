@@ -9,8 +9,10 @@
                          "x-csrf-token" (.-value (.getElementById js/document "token"))}
          :params        @fields
          :handler       #(do
-                           (reset! errors nil)
-                           (swap! messages conj (assoc @fields :timestamp (js/Date.))))
+                           (let [f @fields]
+                             (reset! errors nil)
+                             (reset! fields {})
+                             (swap! messages conj (assoc f :timestamp (js/Date.)))))
          :error-handler #(do
                            (.log js/console (str %))
                            (reset! errors (get-in % [:response :errors])))}))
@@ -38,8 +40,8 @@
           {:rows      4
            :cols      50
            :name      :message
-           :on-change #(swap! fields assoc :message (-> % .-target .-value))}
-          (:message @fields)]]
+           :value     (:message @fields)
+           :on-change #(swap! fields assoc :message (-> % .-target .-value))}]]
         [:input.btn.btn-primary
          {:type     :submit
           :on-click #(send-message! fields errors messages)
