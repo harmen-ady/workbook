@@ -2,10 +2,10 @@
   (:require [workbook.layout :as layout]
             [workbook.db.core :as db]
             [compojure.core :refer [defroutes GET POST]]
-            [ring.util.http-response :as response]
             [clojure.java.io :as io]
             [bouncer.core :as b]
-            [bouncer.validators :as v])
+            [bouncer.validators :as v]
+            [ring.util.response :refer [response status]])
   (:import (java.util Date)))
 
 (defn home-page [{:keys [flash]}]
@@ -26,12 +26,11 @@
 
 (defn save-message! [{:keys [params]}]
   (if-let [errors (validate-message params)]
-    (-> (response/found "/")
-        (assoc :flash (assoc params :errors errors)))
+    (-> {:errors errors} response (status 400))
     (do
       (db/save-message!
         (assoc params :timestamp (Date.)))
-      (response/found "/"))))
+      (response {:status :ok}))))
 
 (defroutes home-routes
            (GET "/" request (home-page request))

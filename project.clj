@@ -29,7 +29,8 @@
                  [luminus-immutant "0.1.0"]
                  [luminus-log4j "0.1.2"]
                  [org.clojure/clojurescript "1.7.228" :scope "provided"]
-                 [reagent "0.5.1"]]
+                 [reagent "0.5.1"]
+                 [cljs-ajax "0.5.2"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "workbook.jar"
