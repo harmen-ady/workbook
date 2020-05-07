@@ -9,10 +9,7 @@
   (:import (java.util Date)))
 
 (defn home-page [{:keys [flash]}]
-  (layout/render
-    "home.html"
-    (merge {:messages (db/get-messages)}
-           (select-keys flash [:name :message :errors]))))
+  (layout/render "home.html"))
 
 (defn about-page []
   (layout/render "about.html"))
@@ -34,6 +31,7 @@
 
 (defroutes home-routes
            (GET "/" request (home-page request))
+           (GET "/messages" [] (response (db/get-messages)))
            (POST "/message" request (save-message! request))
            (GET "/about" [] (about-page)))
 
