@@ -7,6 +7,7 @@
             [compojure.route :as route]
             [config.core :refer [env]]
             [workbook.config :refer [defaults]]
+            [workbook.routes.ws :refer [websocket-routes]]
             [mount.core :as mount]
             [luminus.logger :as logger]))
 
@@ -32,6 +33,7 @@
 
 (def app-routes
   (routes
+    #'websocket-routes
     (wrap-routes #'home-routes middleware/wrap-csrf)
     (route/not-found
       (:body
