@@ -34,7 +34,6 @@
       message)))
 
 (defn handle-message! [{:keys [id client-id ?data]}]
-  (println "\n\n+++++++ GOT MESSAGE:" id (keys ?data))
   (when (= id :workbook/add-message)
     (let [response (-> ?data
                        (assoc :timestamp (java.util.Date.))
@@ -48,7 +47,6 @@
   (when stop-fn (stop-fn)))
 
 (defn start-router! []
-  (println "\n\n+++++++ STARTING ROUTER! +++++++\n")
   (sente/start-chsk-router! ch-chsk handle-message!))
 
 (defstate router
