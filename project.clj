@@ -15,6 +15,8 @@
                  [org.webjars.bower/tether "1.1.1"]
                  [org.webjars/jquery "2.2.0"]
                  [org.clojure/tools.logging "0.3.1"]
+                 [com.taoensso/timbre "4.1.5"]
+                 [com.taoensso/sente "1.7.0"]
                  [com.taoensso/tower "3.0.2"]
                  [compojure "1.4.0"]
                  [ring-webjars "0.1.1"]
