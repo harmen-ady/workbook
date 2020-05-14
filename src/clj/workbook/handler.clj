@@ -1,5 +1,5 @@
 (ns workbook.handler
-  (:require [compojure.core :refer [defroutes routes wrap-routes]]
+  (:require [compojure.core :refer [routes wrap-routes]]
             [workbook.layout :refer [error-page]]
             [workbook.routes.home :refer [home-routes]]
             [workbook.middleware :as middleware]

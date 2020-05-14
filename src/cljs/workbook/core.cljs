@@ -1,6 +1,7 @@
 (ns workbook.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [ajax.core :refer [GET POST]]))
+            [ajax.core :refer [GET POST]]
+            [clojure.string :refer [join]]))
 
 (defn send-message! [fields errors messages]
   (POST "/message"
@@ -19,7 +20,7 @@
 
 (defn errors-component [error id]
   (when-let [error (id @error)]
-    [:div.alert.alert-danger (clojure.string/join error)]))
+    [:div.alert.alert-danger (join error)]))
 
 (defn message-form [messages]
   (let [fields (atom {})

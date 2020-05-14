@@ -2,13 +2,12 @@
   (:require [workbook.layout :as layout]
             [workbook.db.core :as db]
             [compojure.core :refer [defroutes GET POST]]
-            [clojure.java.io :as io]
             [bouncer.core :as b]
             [bouncer.validators :as v]
             [ring.util.response :refer [response status]])
   (:import (java.util Date)))
 
-(defn home-page [{:keys [flash]}]
+(defn home-page []
   (layout/render "home.html"))
 
 (defn about-page []
@@ -30,9 +29,7 @@
       (response {:status :ok}))))
 
 (defroutes home-routes
-           (GET "/" request (home-page request))
+           (GET "/" [] (home-page))
            (GET "/messages" [] (response (db/get-messages)))
            (POST "/message" request (save-message! request))
            (GET "/about" [] (about-page)))
-
-
